@@ -2,7 +2,7 @@ name: Comment Actor & Branch Info
  
 on:
   issues:
-    types: [opened]  # Runs when a new issue is created
+    types: [opened]  
  
 jobs:
   comment:
@@ -13,8 +13,8 @@ jobs:
         with:
           github-token: ${{ secrets.TOKEN }}
           script: |
-            const actor = context.actor;         // person who triggered the workflow
-            const ref = context.ref || 'N/A';   // Git branch or tag ref
+            const actor = context.actor;        
+            const ref = context.ref || 'N/A';   
  
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
