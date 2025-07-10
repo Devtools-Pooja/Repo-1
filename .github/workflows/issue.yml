@@ -11,7 +11,7 @@ jobs:
       - name: Comment who opened and branch name
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.TOKEN }}
           script: |
             const actor = context.actor;         // person who triggered the workflow
             const ref = context.ref || 'N/A';   // Git branch or tag ref
