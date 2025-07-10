@@ -1,0 +1,24 @@
+name: Comment Actor & Branch Info
+ 
+on:
+  issues:
+    types: [opened]  # Runs when a new issue is created
+ 
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment who opened and branch name
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const actor = context.actor;         // person who triggered the workflow
+            const ref = context.ref || 'N/A';   // Git branch or tag ref
+ 
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: ` @${actor} opened this issue on branch \`${ref}\`.`
+            });
